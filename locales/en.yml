@@ -1,0 +1,7 @@
+en:
+  messages:
+    parser_error: "Failed to parse the API response"
+    failed_request: "API request failed: %{code} %{message}"
+    api_request_error: "An error occurred while making the API request: %{exception}"
+    search_place_api_error: "An error occurred while searching for the place: %{exception}"
+    search_id_api_error: "An error occurred while retrieving reviews from the Google Places API: %{exception}"
