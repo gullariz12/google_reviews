@@ -2,12 +2,16 @@ PATH
   remote: .
   specs:
     google_reviews (0.1.0)
+      i18n
 
 GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    concurrent-ruby (1.2.2)
     diff-lcs (1.5.0)
+    i18n (1.14.1)
+      concurrent-ruby (~> 1.0)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
     parallel (1.23.0)
