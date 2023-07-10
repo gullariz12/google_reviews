@@ -46,9 +46,9 @@ Make sure to replace `YOUR_API_KEY` with your actual Google Places API key.
 
 The gem provides custom error classes that you can handle to deal with specific error scenarios. Here are the error classes available:
 
-`GoogleReviews::ApiError:` Represents general API-related errors.
-`GoogleReviews::InvalidApiKeyError:` Indicates an invalid API key error.
-`GoogleReviews::InvalidPlaceIdError:` Indicates an invalid place ID error.
+- `GoogleReviews::ApiError:` Represents general API-related errors.
+- `GoogleReviews::InvalidApiKeyError:` Indicates an invalid API key error.
+- `GoogleReviews::InvalidPlaceIdError:` Indicates an invalid place ID error.
 You can rescue and handle these errors to provide appropriate error handling in your application.
 
 ## Configuration
