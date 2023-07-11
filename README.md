@@ -54,9 +54,13 @@ You can rescue and handle these errors to provide appropriate error handling in 
 ## Configuration
 The gem doesn't require any additional configuration. However, it's recommended to configure the locale for translations. By default, the gem uses English (`:en`) as the locale. If you want to use a different locale, you can modify the `lib/google_reviews/translations.rb file`.
 
+## Submitting a Pull Request
+
+[Fork](https://help.github.com/articles/fork-a-repo/) the [official repository](https://github.com/TheArtOfCoding/google_reviews).
+[Create a topic branch.](https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/)
+Implement your feature or bug fix.
+Add, commit, and push your changes.
+[Submit a pull request.](https://help.github.com/articles/using-pull-requests/)
+
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/gullariz12/google_reviews. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/gullariz12/google_reviews/blob/master/CODE_OF_CONDUCT.md).
