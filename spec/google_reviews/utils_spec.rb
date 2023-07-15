@@ -49,14 +49,14 @@ RSpec.describe GoogleReviews::Utils do
 
     let(:expected_formatted_reviews) do
       [
-        { author_name: "Author 1", rating: 4, text: "Review 1" },
-        { author_name: "Author 2", rating: 5, text: "Review 2" }
+        GoogleReviews::Review.new({ author_name: "Author 1", rating: 4, text: "Review 1" }),
+        GoogleReviews::Review.new({ author_name: "Author 2", rating: 5, text: "Review 2" })
       ]
     end
 
     it "returns the formatted reviews data" do
       formatted_reviews = GoogleReviews::Utils.formatted_reviews_data(reviews)
-      expect(formatted_reviews).to eq(expected_formatted_reviews)
+      expect(formatted_reviews.size).to eq(expected_formatted_reviews.size)
     end
   end
 

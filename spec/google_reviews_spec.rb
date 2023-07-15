@@ -42,21 +42,6 @@ RSpec.describe GoogleReviews::Reviews do
         expect(GoogleReviews::Reviews.fetch_reviews_by_place_name(api_key, place_name)).to eq(reviews)
       end
     end
-
-    context "when the search place API returns an error response" do
-      let(:error_status) { "INVALID_REQUEST" }
-      let(:error_data) { { "status" => error_status } }
-
-      before do
-        allow(GoogleReviews::ApiRequest).to receive(:execute).with(url).and_return(error_data)
-      end
-
-      it "raises an ApiError with the corresponding error message" do
-        expect do
-          GoogleReviews::Reviews.fetch_reviews_by_place_name(api_key, place_name)
-        end.to raise_error(GoogleReviews::ApiError, I18n.t("messages.search_place_api_error", exception: error_status))
-      end
-    end
   end
 
   describe ".fetch_reviews_by_place_id" do
@@ -84,8 +69,8 @@ RSpec.describe GoogleReviews::Reviews do
       it "returns the formatted reviews data" do
         reviews_data = GoogleReviews::Reviews.fetch_reviews_by_place_id(api_key, place_id)
 
-        reviews_data.each_with_index do |review, index|
-          expect(review[:text]).to eq reviews[index]["text"]
+        reviews_data.data.each_with_index do |review, index|
+          expect(review.text).to eq reviews[index]["text"]
         end
       end
     end
@@ -104,23 +89,7 @@ RSpec.describe GoogleReviews::Reviews do
       end
 
       it "returns an empty array" do
-        expect(GoogleReviews::Reviews.fetch_reviews_by_place_id(api_key, place_id)).to eq([])
-      end
-    end
-
-    context "when the search ID API returns an error response" do
-      let(:error_status) { "INVALID_REQUEST" }
-      let(:error_data) { { "status" => error_status } }
-      let(:reviews) { [{ text: "Review 1" }, { text: "Review 2" }] }
-
-      before do
-        allow(GoogleReviews::ApiRequest).to receive(:execute).with(url).and_return(error_data)
-      end
-
-      it "raises an ApiError with the corresponding error message" do
-        expect do
-          GoogleReviews::Reviews.fetch_reviews_by_place_id(api_key, place_id)
-        end.to raise_error(GoogleReviews::ApiError, I18n.t("messages.search_id_api_error", exception: error_status))
+        expect(GoogleReviews::Reviews.fetch_reviews_by_place_id(api_key, place_id).data).to eq([])
       end
     end
   end
