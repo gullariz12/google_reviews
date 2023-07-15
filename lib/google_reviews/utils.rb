@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "google_reviews/review"
+
 # GoogleReviews module
 module GoogleReviews
   # Various utility methods
@@ -13,13 +15,31 @@ module GoogleReviews
     end
 
     def formatted_reviews_data(reviews)
+      return [] if reviews.nil? || reviews.empty?
+
       reviews.map do |review|
-        {
-          author_name: review["author_name"],
-          rating: review["rating"],
-          text: review["text"]
-        }
+        Review.new(review)
       end
+    end
+
+    def execute_place_name_request(url)
+      data = ApiRequest.execute(url)
+
+      raise ApiError, I18n.t("messages.search_place_api_error", exception: data["status"]) unless data["status"] == "OK"
+
+      data["results"]
+    end
+
+    def execute_place_id_request(url)
+      data = ApiRequest.execute(url)
+
+      error = I18n.t("messages.search_id_api_error", exception: data["status"])
+      return GoogleReviews::Response.new(status: data["status"], error: error) unless data["status"] == "OK"
+
+      reviews = data["result"]["reviews"]
+      return GoogleReviews::Response.new if reviews.nil? || reviews.empty?
+
+      GoogleReviews::Response.new(data: formatted_reviews_data(reviews))
     end
 
     private
@@ -28,6 +48,7 @@ module GoogleReviews
       URI.encode_www_form_component(place_name)
     end
 
-    module_function :request_uri, :formatted_reviews_data, :encoded_place_name
+    module_function :request_uri, :formatted_reviews_data, :encoded_place_name, :execute_place_id_request,
+                    :execute_place_name_request
   end
 end

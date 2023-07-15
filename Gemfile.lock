@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    google_reviews (1.0.0)
+    google_reviews (1.1.2)
       i18n
 
 GEM
